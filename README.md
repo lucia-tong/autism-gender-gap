@@ -1,18 +1,24 @@
-# Brecha de Género en el Diagnóstico del TEA
+# Gender Gap in ASD Diagnosis
 
-Un análisis de datos a escala global (194 paises) para cuantificar la brecha de género en el diagnóstico del Trastorno del Espectro Autista: edad de diagnóstico, prevalencia reportada y acceso a terapias, cruzados con indicadores socioeconómicos por país.
+A global-scale data analysis covering 194 countries to quantify the gender gap in Autism Spectrum Disorder (ASD) diagnosis. This project examines the age of diagnosis, reported prevalence, and access to therapies, cross-referenced with socioeconomic indicators per country.
 
-## qué hace
+## Key Features
 
-* construye un dataset consolidado a partir de fuentes públicas (GBD/IHME, Our World in Data, WHO Atlas, Banco Mundial, PNUD)
-* analiza la distribución de la brecha de diagnóstico por género y región
-* identifica correlaciones entre la brecha y variables como el GII, el PIB o el gasto en salud mental
-* entrena modelos de regresión para predecir la edad de diagnóstico en mujeres
-* clasifica países según probabilidad de diagnóstico tardío (variable binaria)
-* segmenta países con K-Means en 4 perfiles de inequidad diagnóstica
-* genera visualizaciones exportables a `outputs/`
+* Data Consolidation: Builds a unified dataset from diverse public sources (GBD/IHME, Our World in Data, WHO Atlas, World Bank, UNDP).
 
-## estructura
+* DDistribution Analysis: Analyzes the diagnosis gap across different genders and geographic regions.
+
+* DCorrelation Mapping: Identifies links between the gender gap and variables such as the Gender Inequality Index (GII), GDP, and mental health spending.
+
+* DPredictive Modeling: Trains regression models to predict the age of diagnosis in women.
+
+* DRisk Classification: Classifies countries based on the probability of late diagnosis (binary variable).
+
+* DClustering: Segments countries into four distinct "diagnostic inequity profiles" using K-Means.
+
+* DAutomated Visualization: Generates exportable charts directly to the outputs/ directory.
+
+## Project Structure
 
 ```
 tfm-autism-gender-gap/
@@ -21,38 +27,38 @@ tfm-autism-gender-gap/
 └── README.md
 ```
 
-## cómo ejecutarlo
+## Installation & Usage
 
 ```bash
 pip install -r requirements.txt
 jupyter notebook autism_gender_gap.ipynb
 ```
 
-el notebook genera automáticamente la carpeta `outputs/` con todos los gráficos.
+Note: The notebook automatically creates an outputs/ folder to store all generated visualizations.
 
-## variables principales del dataset
+## Primary Dataset Variables
 
-* `age_gap` — brecha en edad de diagnóstico (mujeres − hombres, en años)
-* `diagnosis_gap` — brecha de prevalencia reportada (hombres − mujeres, por 100k)
+* `age_gap` — Difference in age of diagnosis (Women − Men, in years).
+* `diagnosis_gap` — Difference in reported prevalence (Men − Women, per 100k).
 * `gii` — Gender Inequality Index (PNUD)
-* `mental_health_exp` — gasto en salud mental como % del gasto sanitario (WHO)
-* `late_diagnosis` — variable binaria: 1 si age_gap supera el percentil 75
+* `mental_health_exp` — Mental health expenditure as a % of total health spending (WHO).
+* `late_diagnosis` — Binary variable (1 if age_gap exceeds the 75th percentile).
+  
+## Applied Models
 
-## modelos aplicados
+* Regression: Ridge, Random Forest.
+* Classification: Logistic Regression, Random Forest (Target AUC-ROC: 0.89).
+* Clustering: K-Means ($K=4$) validated by Silhouette Score and the Elbow Method.
+* Explainability: Feature importance via Random Forest and SHAP values included in the full pipeline.
 
-* regresión: Ridge, Random Forest
-* clasificación: Regresión Logística, Random Forest (AUC-ROC target: 0.89)
-* clustering: K-Means K=4 con validación por Silhouette Score y método del codo
-* explicabilidad: importancia de variables por Random Forest (SHAP en el pipeline completo)
+## Data Sources
 
-## fuentes de datos
+* GBD Study — IHME: ASD prevalence by country and gender.
+* Our World in Data: Autism research datasets.
+* WHO Mental Health Atlas 2020: Global mental health infrastructure.
+* World Bank: World Development Indicators
+* UNDP: Human Development Reports.
 
-* GBD Study — IHME (prevalencia TEA por país y género)
-* Our World in Data — Autism dataset
-* WHO Mental Health Atlas 2020
-* Banco Mundial — World Development Indicators
-* PNUD — Human Development Reports
+## Tech Stack
 
-## stack
-
-python · pandas · numpy · scikit-learn · matplotlib · seaborn
+Python · Pandas · Numpy · Scikit-learn · Matplotlib · Seaborn
